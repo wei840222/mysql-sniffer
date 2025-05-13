@@ -1,0 +1,13 @@
+[project]
+name = "mysql-sniffer"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "kubernetes>=32.0.1",
+    "python-json-logger>=3.3.0",
+    "readerwriterlock>=1.0.9",
+    "scapy>=2.6.1",
+    "sqlparse>=0.5.3",
+]
