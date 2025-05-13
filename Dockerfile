@@ -21,22 +21,10 @@ RUN set -x && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -
     ca-certificates libpcap-dev && \
     rm -rf /var/lib/apt/lists/*
 
-ARG user=app
-ARG group=app
-ARG uid=10000
-ARG gid=10001
-
-RUN groupadd -g ${gid} ${group} \
-    && useradd -l -u ${uid} -g ${gid} -m -s /bin/bash ${user}
-
-USER ${user}
-
 WORKDIR /app
-
-COPY --from=builder --chown=${uid}:${gid} /app /app
+COPY --from=builder /app /app
 
 ENV PATH="/app/.venv/bin:$PATH"
 ENV PYTHONPATH="/app:$PYTHONPATH"
 
-ENTRYPOINT ["python"]
-CMD ["./main.py"]
+ENTRYPOINT ["entrypoint.sh"]
